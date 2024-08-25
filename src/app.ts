@@ -1,7 +1,7 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import config from "./config";
-import db from "./utils/db";
+import connect from "./utils/connect";
 import Logger from "./utils/logger";
 import errorHandler from "./middlewares/errorHandler";
 import requestLogger from "./middlewares/requestLogger";
@@ -17,7 +17,7 @@ app.use(cors());
 app.use(requestLogger);
 
 // root route :
-app.get("/", (req: express.Request, res: express.Response) => {
+app.get("/", (req: Request, res: Response) => {
 	return res.sendStatus(200);
 });
 
@@ -29,8 +29,14 @@ app.use(errorHandler);
 
 // Start server :
 app.listen(config.server.port, () => {
-	Logger.info(`Server started on port ${config.server.port}`);
+	Logger.info(`Server started on port ${ config.server.port }`);
 
-	// connect to database :
-	db.connect(config.mongo.uri);
+	// connect to mongo database :
+	connect.mongodb(config.mongo.uri);
+
+	//connect to chromadb : 
+	connect.chromadb(config.chromadb.url)
+
+	// connect to ollama API :
+	connect.ollamaapi(config.ollama.url)
 });
