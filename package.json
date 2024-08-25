@@ -10,7 +10,7 @@
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC",
+	"license": "MIT",
 	"dependencies": {
 		"chalk": "^4.1.2",
 		"chromadb": "^1.8.1",
