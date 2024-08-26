@@ -2,12 +2,10 @@
  * connections to various external services like
  * MongoDB
  * ChromaDB
- * Ollama
  */
 
 import mongoose from "mongoose";
 import { ChromaClient } from "chromadb";
-import { ListResponse, Ollama } from "ollama";
 import Logger from "./logger";
 
 export default {
@@ -30,16 +28,5 @@ export default {
 			Logger.error("Error in connecting to ChromaDB")
 			Logger.error(error)
 		}
-	},
-	ollamaapi: async (url: string) => {
-		try {
-			const ollama = new Ollama({ host: url })
-			await ollama.ps()
-			Logger.info(`Ollama connected`)
-		} catch (error) {
-			Logger.error("Error in connecting to Ollama")
-			Logger.error(error)
-		}
 	}
-
 };

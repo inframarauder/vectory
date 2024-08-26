@@ -1,12 +1,8 @@
 import express from "express";
-import todoController from "../controllers/todo.controller";
+import documentController from "../controllers/document.controller";
 
 const router = express.Router();
 
-router.get("/", todoController.listTodos);
-router.get("/:id", todoController.readTodo);
-router.post("/", todoController.createTodo);
-router.put("/:id", todoController.updateTodo);
-router.delete("/:id", todoController.deleteTodo);
+router.post('/', documentController.createEmbedding)
 
 export default router;

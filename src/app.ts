@@ -5,7 +5,7 @@ import connect from "./utils/connect";
 import Logger from "./utils/logger";
 import errorHandler from "./middlewares/errorHandler";
 import requestLogger from "./middlewares/requestLogger";
-import todoRoutes from "./routes";
+import api from "./routes";
 
 // Create express app :
 const app = express();
@@ -21,8 +21,8 @@ app.get("/", (req: Request, res: Response) => {
 	return res.sendStatus(200);
 });
 
-// todo routes :
-app.use("/todos", todoRoutes);
+// api routes :
+app.use("/api", api);
 
 // error handler :
 app.use(errorHandler);
@@ -36,7 +36,4 @@ app.listen(config.server.port, () => {
 
 	//connect to chromadb : 
 	connect.chromadb(config.chromadb.url)
-
-	// connect to ollama API :
-	connect.ollamaapi(config.ollama.url)
 });
